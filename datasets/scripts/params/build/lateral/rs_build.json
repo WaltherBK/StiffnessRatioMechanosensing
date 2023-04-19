@@ -1,0 +1,25 @@
+{
+    "build": {
+        "export_to": "export_contours/lateral_rs_P%02d_%d",
+        "annotation_folder": "RS HUVEC %d/annotation",
+        "title": "RS_%d",
+        "comment": "AFM-C RS Cell #%d",
+        "scaling_json_dir": "datasets/RS/RS HUVEC 1/annotation",
+        "scaling_json_fname": "scaling.json",
+        "z_scale": [null, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2],
+        "base_folder": "datasets/RS/",
+        "coord_folder": "RS AFM Coordinate Overlays",
+        "smooth_w": 3,
+        "hold_edge": true,
+        "cap_size_top": 2,
+        "cap_size_bot": 2,
+
+        "interpolation_pts": 36,
+        "resolution_factor": 0.03237,
+        "DZ": 0.3,
+
+        "all_xy_mirror": [[null, 0, 0, 0, 0, 0, 0, 0, 0], [null, 0, 0, 0, 0, 0, 0, 0, 0]],
+        "all_padding": [0],
+        "all_cells": [2,3,5,6,7]
+    }
+}

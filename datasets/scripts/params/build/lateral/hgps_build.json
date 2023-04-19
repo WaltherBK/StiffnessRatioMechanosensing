@@ -1,0 +1,25 @@
+{
+    "build": {
+        "export_to": "export_contours/lateral_hgps_P%02d_%d",
+        "annotation_folder": "HGPS %d/annotation",
+        "title": "HGPS_%d",
+        "comment": "AFM-C HGPS Cell #%d",
+        "scaling_json_dir": "datasets/SR_HGPS1/HGPS 1/annotation",
+        "scaling_json_fname": "new_scaling.json",
+        "z_scale": 0.1,
+        "base_folder": "datasets/SR_HGPS1/",
+        "coord_folder": "HGPS AFM Coordinate Overlays",
+        "smooth_w": 3,
+        "hold_edge": true,
+        "cap_size_top": 2,
+        "cap_size_bot": 2,
+
+        "interpolation_pts": 36,
+        "resolution_factor": 0.03237,
+        "DZ": 0.3,
+
+        "all_xy_mirror": [[null, 0, 0, 0, 0, 0, 0, 0, 0], [null, 1, 1, 0, 0, 0, 0, 0, 0]],
+        "all_padding": [0],
+        "all_cells": [1,2,4,5,6,7,8]
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "extract": {
+        "cell_numbers": [1,2,3,4,5],
+        "base_dir": "datasets/hTert",
+        "specific_ds_base": "hTERT %d/",
+        "ome_fname_base":"shear_hTERT %d_Reconstructed.ome.tif",
+        "n_channels": 3,
+        "keep3": [0,1,2],
+        "use_masks": false,
+        "plot_max": false,
+        "target_dir": "Intensity.png.export/",
+        "globular_full": "Intensity.png.export/Intensity*.png",
+        "desc": "parent_%d",
+        "colorings": [0,1,2]
+    }
+}
