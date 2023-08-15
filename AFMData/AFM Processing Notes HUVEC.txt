@@ -1,0 +1,19 @@
+Data acquisition: 2020.10.28
+
+Relevant Parameters
+	AFM Probe Radius: 1250 nm (1.25 um)
+	Poisson: 0.5
+	Spring Constant: 0.058 N/m
+
+To determine median curve from technical replicates:
+	1. Baseline correction
+	2. Extension curve
+	3. Hertzian (spherical fit): 0% - 20% of the curve
+	4. Extract Young's
+	5. Determine median curve from the technical replicates
+	6. Each curve has above it the measured E from the software as needed
+
+Each exported curve has the contact point zeroed - it occurs at z=0.
+Nuclear/cytoplasmic curves are individually reported - fairly consistent distribution
+
+n=7

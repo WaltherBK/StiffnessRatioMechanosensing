@@ -1,0 +1,13 @@
+Notes:
+HUVEC 6 has some bottom thresholding issues where there is fluorescence beneath the cell
+for the nucleus - I would suggest a bottom cut off
+
+HUVEC 7 has no LMNA staining (photobleach?) - use DAPI instead for modeling
+
+DAPI and LMNA correlate very closely for these modeling/imaging procedure and is used
+generally as a secondary confirmation of nuclear localization, here however for cell
+7, it's the back up for when LMNA imaging failed
+
+Dimensions:
+
+X x Y x Z = 32.37 nm x 32.37 nm x 100 nm
