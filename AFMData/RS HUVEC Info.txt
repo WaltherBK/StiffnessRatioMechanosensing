@@ -1,0 +1,8 @@
+Data collected 2021.03.18
+Imaging 2021.03.23
+
+Many cells are very large/tall
+
+Parameter changes (time):
+	RS-HUVEC 4 - Z-stack taken at 200 um per slice/step
+	RS-HUVEC 7 - Z-stack taken at 200 um per slice/step
