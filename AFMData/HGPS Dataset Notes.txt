@@ -1,0 +1,6 @@
+Data acquisition: 2021.28.01
+
+Relevant Parameters
+	AFM Probe Radius: 1250 nm (1.25 um)
+	Poisson: 0.5
+	Spring Constant: 0.06 N/m
