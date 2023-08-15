@@ -1,6 +1,7 @@
 # confocal-analysis
 
-Written by Adam Sears
+Contouring code written by Adam Sears
+ANSYS Code written by Jacques Ohayon
 
 Code and notebooks for analyzing confocal images of cells from HMRI.
 
