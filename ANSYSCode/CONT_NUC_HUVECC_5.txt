@@ -1,0 +1,14 @@
+!******************************************
+! File name: CONT_NUC_HUVECC_5.txt
+! AFM-C HUVEC 20200626 Group #1, Rescaled Probes, Cell #5
+!******************************************
+/INPUT,'C_NUC_Z01','txt'
+/INPUT,'C_NUC_Z02','txt'
+/INPUT,'C_NUC_Z03','txt'
+/INPUT,'C_NUC_Z04','txt'
+/INPUT,'C_NUC_Z05','txt'
+/INPUT,'C_NUC_Z06','txt'
+/INPUT,'C_NUC_Z07','txt'
+/INPUT,'C_NUC_Z08','txt'
+/INPUT,'C_NUC_Z09','txt'
+/INPUT,'C_NUC_Z10','txt'

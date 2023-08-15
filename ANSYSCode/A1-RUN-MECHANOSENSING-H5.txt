@@ -1,0 +1,374 @@
+! ----------------------------------
+! A1-RUN-MECHANOSENSING-H5.txt
+! ----------------------------------
+! SHEAR FINITE ELEMENT MODELING
+! Case: HUVEC CTRL Cell #5
+! ANSYS APDL SOURCE CODES
+! April 27th, 2023
+! ----------------------------------
+! *************************************************************************
+! Disrupted Stiffness Ratio Alters Nuclear Mechanosensing
+! B.K. Walther, A.Sears, A. Mojiri1, R. Avazmohammadi, J. Gu, O. Chumakova,
+! N.K.R. Pandian, A. Dominic, J.L. Martiel5, S.K. Yazdani, J.P. Cooke,
+! J. Ohayon,and R.I. Pettigrew
+! Corresponding Authors for the Ansys Apdl Source Codes:
+! J. Ohayon, PhD (Email: Jacques.Ohayon@univ-smb.fr)
+! B.K. Walther, PhD (Email:Brandonwalther1@tamu.edu)
+! *************************************************************************
+finish
+/clear
+/prep7               
+! -----------
+! PARAMETERS
+! -----------
+boptn,numb,0
+*afun,deg       	! angle in degree
+WSS=5			! (Pa) Wall Shear Stress
+E_Cyt=17.184		! (kPa) (Young Cyto)
+E_Nuc=9.424		! (kPa) (Young Nucl)
+SRatio=E_Nuc/E_Cyt
+! -----------------------------------------------
+! Neo-Hookean Constitutive Parameters Cytoplasm
+! ----------------------------------------------
+nu_C=0.4999		!quasi incompressible
+mooneyC1_C=E_Cyt*1000/6	! C10 (Pa)
+mooneyC2_C=0		! C01
+mooneyC3_C=0		! C20
+mooneyC4_C=0		! C11
+mooneyC5_C=0		! C02
+mooneyC6_C=0		! C30
+mooneyC7_C=0
+mooneyC8_C=0
+mooneyC9_C=0
+mooneyC10_C=(1-2*nu_C)/(mooneyC1_C+mooneyC2_C)
+! ------------------------------------------------
+! Neo-Hookean Constitutive Parameters for Nucleus
+! ------------------------------------------------
+nu_N=0.4999		!quasi incompressible
+mooneyC1_N=E_Nuc*1000/6	! C10 (Pa)
+mooneyC2_N=0
+mooneyC3_N=0
+mooneyC4_N=0
+mooneyC5_N=0
+mooneyC6_N=0
+mooneyC7_N=0
+mooneyC8_N=0
+mooneyC9_N=0
+mooneyC10_N=(1-2*nu_N)/(mooneyC1_N+mooneyC2_N)
+!
+! ----------------------------------------
+! I. 3D-RECONSTRUCTION OF THE CELL GEOMETRY
+! -----------------------------------------
+/INPUT,'CONT_DATA_HUVECC_5','txt'
+! -------------------------------------------------------------
+! ************************************
+! I.1 3D Reconstruction of the Nucleus
+! ************************************
+! -------------------------------------------------------------
+/INPUT,'CONT_NUC_HUVECC_5','txt'
+! -----------------------------
+! Spline Nuclear Shape
+! ---------------------
+! Base to Top x 20
+! *****************
+*do,i,1,20,1
+  flst,3,n_nuc,3
+  fitem,3,i
+  *do,j,1,n_nuc-1,1
+	fitem,3,i+20*j
+  *enddo
+  bsplin,,p51x
+*enddo
+! *********
+! Base x 20
+! *********
+*do,i,1,19,1
+ flst,3,2,3
+ fitem,3,i
+ fitem,3,i+1
+ bsplin,,p51x
+*enddo
+flst,3,2,3
+fitem,3,20
+fitem,3,1
+bsplin,,p51x
+! ********
+! Top x 20
+! ********
+*do,i,1,19,1
+ flst,3,2,3
+ fitem,3,180+i
+ fitem,3,180+i+1
+ bsplin,,p51x
+*enddo
+flst,3,2,3
+fitem,3,200
+fitem,3,181
+bsplin,,p51x
+! ******************
+! 20 x Lateral Areas
+! ******************
+*do,i,1,19,1
+  al,i,1+i,20+i,40+i
+*enddo
+al,20,1,40,60
+! *************
+! 1 x Area: Top
+! *************
+FLST,2,20,4
+*do,i,41,60,1
+  FITEM,2,i
+*enddo
+AL,P51X 
+! *****************
+! 1 x Area: Bottom
+! *****************
+FLST,2,20,4
+*do,i,21,40,1
+  FITEM,2,i
+*enddo
+AL,P51X 
+! ******************
+! Nuclear Volume
+! ******************
+FLST,2,22,5,ORDE,2  
+FITEM,2,1   
+FITEM,2,-22
+VA,P51X 
+!
+! **************************************
+! I.2 3D Reconstruction of the Cytoplasm
+! **************************************
+/INPUT,'CONT_CYTO_HUVECC_5','txt'
+! ------------------------------
+! Spline Cytoplasmic Shape
+! ---------------------
+! Base to Top x 20
+! ******************
+nn=200
+*do,i,nn+1,nn+20,1
+  flst,3,n_cyt,3
+  fitem,3,i
+  *do,j,1,n_cyt-1,1
+	fitem,3,i+20*j
+  *enddo
+  bsplin,,p51x
+*enddo
+! *********
+! Base x 20
+! *********
+*do,i,201,219,1
+ flst,3,2,3
+ fitem,3,i
+ fitem,3,i+1
+ bsplin,,p51x
+*enddo
+flst,3,2,3
+fitem,3,220
+fitem,3,201
+bsplin,,p51x
+! *********
+! Top x 20
+! *********
+*do,i,201,219,1
+ flst,3,2,3
+ fitem,3,180+i
+ fitem,3,180+i+1
+ bsplin,,p51x
+*enddo
+flst,3,2,3
+fitem,3,400
+fitem,3,381
+bsplin,,p51x
+! ******************
+! 20 x Lateral Areas
+! ******************
+*do,i,61,79,1
+  al,i,1+i,20+i,40+i
+*enddo
+al,80,100,61,120
+! ***************
+! 1 x Area: Top
+! ***************
+FLST,2,20,4
+*do,i,101,120,1
+  FITEM,2,i
+*enddo
+AL,P51X 
+! *****************
+! 1 x Area: Bottom
+! *****************
+FLST,2,20,4
+*do,i,81,100,1
+  FITEM,2,i
+*enddo
+AL,P51X 
+! ******************
+! Cytoplasmic Volume
+! ******************
+FLST,2,22,5,ORDE,2  
+FITEM,2,23   
+FITEM,2,-44
+VA,P51X
+!
+! -------------------
+! Boolean operations
+! -------------------
+vsbv,2,1,,del,keep
+allsel
+vglue,all
+!
+NVcyt=4		! For Mesh: N° volu nuc
+NVnuc=2		! For Mesh: N° volu cyto
+!/eof
+!
+! --------------------------------------
+! II. FINITE ELEMENT & CONSTITUTIVE LAWS
+! --------------------------------------
+! II.1/ Finite Elements 
+! ---------------------
+et,1,solid187,,,,,,1	
+! ---------------------------
+! II.2/Mechanical Properties
+! -------------------------------------------
+! Cytoplasm: Neo-Hookean Law - (Mat=1, elt=1)
+! -------------------------------------------
+TB,HYPER,1,,9,MOONEY
+tbdata,1,mooneyC1_C		!C10(I1-3)
+tbdata,2,mooneyC2_C		!C01(I2-3)
+tbdata,3,mooneyC3_C		!C20(I1-3)^2
+tbdata,4,mooneyC4_C		!C11(I1-3)(I2-3)
+tbdata,5,mooneyC5_C		!C02(I2-3)^2
+tbdata,6,mooneyC6_C		!C30(I1-3)^3
+tbdata,7,mooneyC7_C		!C21(I1-3)^2(I2-3)
+tbdata,8,mooneyC8_C		!C12(I1-3)(I2-3)^2
+tbdata,9,mooneyC9_C		!C03(I2-3)^3
+tbdata,10,mooneyC10_C 		!(1/C10)(J-1)^2
+! -----------------------------------------
+! Nucleus: Neo-Hookean Law - (Mat=5, elt=1)
+! -----------------------------------------
+TB,HYPER,5,,9,MOONEY
+tbdata,1,mooneyC1_N		!C10(I1-3)
+tbdata,2,mooneyC2_N		!C01(I2-3)
+tbdata,3,mooneyC3_N		!C20(I1-3)^2
+tbdata,4,mooneyC4_N		!C11(I1-3)(I2-3)
+tbdata,5,mooneyC5_N		!C02(I2-3)^2
+tbdata,6,mooneyC6_N		!C30(I1-3)^3
+tbdata,7,mooneyC7_N		!C21(I1-3)^2(I2-3)
+tbdata,8,mooneyC8_N		!C12(I1-3)(I2-3)^2
+tbdata,9,mooneyC9_N		!C03(I2-3)^3
+tbdata,10,mooneyC10_N 		!(1/C10)(J-1)^2
+!
+! ------------
+! III. MESH
+! ------------
+esize_c=1.5	! Element size for Cyto
+esize_n=1.5	! Element size for Nucleus
+!----------------------------------
+! Volume number 2 is the nucleus
+! Volume number 4 is the cytoplasm
+! ---------------------------------
+! III.1 Mesh Nucleus
+! --------------------
+allsel
+vatt,5,,1
+esize,esize_n
+vmesh,2	
+! -----------------------
+! III.2  Mesh Cytoplasm
+! -----------------------
+allsel
+esize,esize_c
+vatt,1,,1	   
+vmesh,4
+!/eof
+! ----------------------
+! IV. BOUNDARY CONDITIONS
+! ----------------------
+! Looking for the Long Axis of the Cell
+! ------------------------------------
+Didi=0
+Ango=1000
+ninit=200
+*do,k,1,10,1
+  DIAX=kx(ninit+k)-kx(ninit+10+k)
+  DIAY=ky(ninit+k)-ky(ninit+10+k)
+  Dia=sqrt(DIAX**2+DIAY**2)
+  RR=sqrt(kx(ninit+10+k)**2+ky(ninit+10+k)**2)
+  ANG=Acos(kx(ninit+10+k)/RR)	!
+  *if,Dia,GT,Didi,THEN
+	Didi=Dia
+	kk=k
+	Ango=ANG
+   *endif
+*enddo
+! --------------------------
+! IV.1 Imposed Shear Stress
+! --------------------------
+allsel
+ET,2,SURF154   	
+asel,s,area,,23,43,1 
+amesh,all
+!
+local,11,0,0,0,0,Ango   
+emodif,all,esys,11,,,,,	
+allsel
+eplo
+
+esel,s,type,,2
+sfe,all,2,pres,,WSS
+
+/PSF,PRES,TANX,2,0,1
+/VIEW,1,,1
+eplo
+!/eof
+
+! ----------------------
+! IV.2 Based Fixed
+! ----------------------
+allsel
+nsel,s,loc,z,0
+d,all,all,0
+!/eof
+! ---------
+! V.SOLVER
+! ---------
+/solu     	
+allsel
+nlgeom,on
+Time,1
+deltim,0.1  	
+outres,all,all	
+save      	
+solve
+!/eof 
+! -------------------
+! VI. POSTPROCESSOR 
+! -------------------
+/post1
+set,last
+allsel
+vsel,s,,,2
+eslv,s
+nsle,s,corner
+aslv,s
+nsla,r,1
+*get,node_number,NODE,0,COUNT
+*get,node_min,NODE,0,NUM,MIN
+!
+CRIT_SINT=0
+j=node_min
+*do,w,1,node_number,1
+  *get,smax2,node,j,S,INT	
+  CRIT_SINT=CRIT_SINT+smax2
+  j1=j
+  j=ndnext(j)
+*enddo
+CRIT_SINT=CRIT_SINT/node_number
+PEAST=100*CRIT_SINT/10
+/OUT,A2-MECHANOSENSING-H5-OUTPUT-Walther2023,txt,,append
+*vwrite,WSS,E_Cyt,E_Nuc,SRatio,PEAST
+(E15.9,'   ',E15.9,'   ',E15.9,'   ',E15.9,'   ',E15.9)
+/OUT
+/eof
+

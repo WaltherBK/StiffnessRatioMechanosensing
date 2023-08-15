@@ -1,0 +1,43 @@
+!******************************************
+! File Name:  CONT_DATA_HUVECC_5.txt
+! AFM-C HUVEC 20200626 Group #1, Probes, Cell #5
+!******************************************
+n_nuc=10    ! numb of files of nucl cont
+n_cyt=10    ! numb of files of cyto cont
+Z_cyt=2.600   ! (µm) Max Cyto Z-value (Cell Height)
+Z_nuc=2.300   ! (µm) Max Nuc Z-value (Nuc Height)
+Zmax=Z_cyt  ! (µm) Max height cyto
+DZ=0.300	     ! (µm) step Z-slices
+!---------------------------------------------------
+xc=-1.775  ! (µm) X position AFM Probe nuc
+yc=-15.469 ! (µm) Y position AFM Probe nuc
+!
+xn=-6.529 !(µm) X position AFM Prob cyt
+yn=0.556    !(µm) Y position AFM Probe cyt
+
+!
+!--------
+! Arrays
+!--------
+! associated to nucleus
+!----------------------
+*dim,NC,array,n_nuc
+*dim,NChalf,array,n_nuc
+*dim,NNN,array,n_nuc
+*dim,NN2,array,n_nuc
+*dim,NI,array,n_nuc
+*dim,NP,array,n_nuc
+*dim,NL,array,n_nuc
+*dim,NR,array,n_nuc
+!------------------------
+! associated to cytoplasm
+!------------------------
+*dim,NCY,array,n_cyt
+*dim,NCYhalf,array,n_cyt
+*dim,NNNY,array,n_cyt
+*dim,NN2Y,array,n_cyt
+*dim,NIY,array,n_cyt
+*dim,NPY,array,n_cyt
+*dim,NLY,array,n_cyt
+*dim,NRY,array,n_cyt
+!******************************************

@@ -1,0 +1,14 @@
+!******************************************
+! File name: CONT_CYTO_HUVECC_5.txt
+! AFM-C HUVEC 20200626 Group #1, Rescaled Probes, Cell #5
+!******************************************
+/INPUT,'C_CYTO_Z01','txt'
+/INPUT,'C_CYTO_Z02','txt'
+/INPUT,'C_CYTO_Z03','txt'
+/INPUT,'C_CYTO_Z04','txt'
+/INPUT,'C_CYTO_Z05','txt'
+/INPUT,'C_CYTO_Z06','txt'
+/INPUT,'C_CYTO_Z07','txt'
+/INPUT,'C_CYTO_Z08','txt'
+/INPUT,'C_CYTO_Z09','txt'
+/INPUT,'C_CYTO_Z10','txt'
